@@ -12,7 +12,7 @@ public class Game {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer id;
 
 	@Column(name = "Name", nullable = false)
 	private String name;
@@ -33,15 +33,15 @@ public class Game {
 
 	}
 
-	public Game(Integer id, String name, String genre, String progress, int platformId) {
-		Id = id;
+	public Game(Integer id, String name, String genre, String progress, Integer platformId) {
+		this.id = id;
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
 		this.platformId = platformId;
 	}
 
-	public Game(String name, String genre, String progress, int platformId) {
+	public Game(String name, String genre, String progress, Integer platformId) {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
@@ -49,11 +49,11 @@ public class Game {
 	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -84,13 +84,13 @@ public class Game {
 		return platformId;
 	}
 
-	public void setPlatformId(int platformId) {
+	public void setPlatformId(Integer platformId) {
 		this.platformId = platformId;
 	}
 
 	@Override
 	public String toString() {
-		return "Game [Id=" + Id + ", name=" + name + ", genre=" + genre + ", progress=" + progress + ", platformId="
+		return "Game [Id=" + id + ", name=" + name + ", genre=" + genre + ", progress=" + progress + ", platformId="
 				+ platformId + "]";
 	}
 
@@ -98,7 +98,7 @@ public class Game {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + platformId;
@@ -115,10 +115,10 @@ public class Game {
 		if (getClass() != obj.getClass())
 			return false;
 		Game other = (Game) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		if (genre == null) {
 			if (other.genre != null)
