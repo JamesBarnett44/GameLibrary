@@ -16,7 +16,7 @@ public class Platform {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer id;
 	
 	@Column(name = "Name", nullable = false)
 	private String name;
@@ -28,8 +28,8 @@ public class Platform {
 	public Platform() {
 	}
 
-	public Platform(int id, String name) {
-		Id = id;
+	public Platform(Integer id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
@@ -38,11 +38,11 @@ public class Platform {
 	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -55,14 +55,14 @@ public class Platform {
 	
 	@Override
 	public String toString() {
-		return "Platform [Id=" + Id + ", name=" + name + "]";
+		return "Platform [Id=" + id + ", name=" + name + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Id;
+		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -76,7 +76,7 @@ public class Platform {
 		if (getClass() != obj.getClass())
 			return false;
 		Platform other = (Platform) obj;
-		if (Id != other.Id)
+		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)

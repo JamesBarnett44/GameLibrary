@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PlatformDTO {
 
-	private Integer Id;
+	private Integer id;
 	private String name;
 	private List<GameDTO> games;
 
@@ -12,7 +12,7 @@ public class PlatformDTO {
 	}
 
 	public PlatformDTO(Integer id, String name) {
-		Id = id;
+		this.id = id;
 		this.name = name;
 	}
 
@@ -21,11 +21,11 @@ public class PlatformDTO {
 	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -46,14 +46,14 @@ public class PlatformDTO {
 
 	@Override
 	public String toString() {
-		return "PlatformDTO [Id=" + Id + ", name=" + name + ", games=" + games + "]";
+		return "PlatformDTO [Id=" + id + ", name=" + name + ", games=" + games + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((games == null) ? 0 : games.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -68,10 +68,10 @@ public class PlatformDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		PlatformDTO other = (PlatformDTO) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		if (games == null) {
 			if (other.games != null)
