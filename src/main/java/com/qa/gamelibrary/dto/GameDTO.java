@@ -1,39 +1,18 @@
-package com.qa.gamelibrary.domain;
+package com.qa.gamelibrary.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+public class GameDTO {
 
-@Entity
-public class Game {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-
-	@Column(name = "Name", nullable = false)
 	private String name;
-
-	@Column(name = "Genre")
 	private String genre;
-
-	@Column(name = "Progress")
 	private String progress;
-
-	@Column(name = "Platform", nullable = false)
 	private int platformId;
-	
-	@ManyToOne
-	private Platform platform;
 
-	public Game() {
+	public GameDTO() {
 
 	}
 
-	public Game(Integer id, String name, String genre, String progress, int platformId) {
+	public GameDTO(Integer id, String name, String genre, String progress, int platformId) {
 		Id = id;
 		this.name = name;
 		this.genre = genre;
@@ -41,7 +20,7 @@ public class Game {
 		this.platformId = platformId;
 	}
 
-	public Game(String name, String genre, String progress, int platformId) {
+	public GameDTO(String name, String genre, String progress, int platformId) {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
@@ -114,7 +93,7 @@ public class Game {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Game other = (Game) obj;
+		GameDTO other = (GameDTO) obj;
 		if (Id == null) {
 			if (other.Id != null)
 				return false;

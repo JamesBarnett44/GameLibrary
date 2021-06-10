@@ -1,39 +1,22 @@
-package com.qa.gamelibrary.domain;
+package com.qa.gamelibrary.dto;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+public class PlatformDTO {
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
-public class Platform {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	
-	@Column(name = "Name", nullable = false)
 	private String name;
-	
-	@OneToMany
-	@JsonIgnore
-	private List<Game> games;
+	private List<GameDTO> games;
 
-	public Platform() {
+	public PlatformDTO() {
 	}
 
-	public Platform(int id, String name) {
+	public PlatformDTO(Integer id, String name) {
 		Id = id;
 		this.name = name;
 	}
 
-	public Platform(String name) {
+	public PlatformDTO(String name) {
 		this.name = name;
 	}
 
@@ -41,7 +24,7 @@ public class Platform {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 
@@ -52,17 +35,26 @@ public class Platform {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public List<GameDTO> getGames() {
+		return games;
+	}
+
+	public void setGames(List<GameDTO> games) {
+		this.games = games;
+	}
+
 	@Override
 	public String toString() {
-		return "Platform [Id=" + Id + ", name=" + name + "]";
+		return "PlatformDTO [Id=" + Id + ", name=" + name + ", games=" + games + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Id;
+		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((games == null) ? 0 : games.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -75,8 +67,16 @@ public class Platform {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Platform other = (Platform) obj;
-		if (Id != other.Id)
+		PlatformDTO other = (PlatformDTO) obj;
+		if (Id == null) {
+			if (other.Id != null)
+				return false;
+		} else if (!Id.equals(other.Id))
+			return false;
+		if (games == null) {
+			if (other.games != null)
+				return false;
+		} else if (!games.equals(other.games))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -85,7 +85,5 @@ public class Platform {
 			return false;
 		return true;
 	}
-	
-	
 
 }
