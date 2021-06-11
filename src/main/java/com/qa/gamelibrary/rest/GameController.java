@@ -47,6 +47,11 @@ public class GameController {
 		return this.service.getGames();
 	}
 	
+	@GetMapping("/{id}")
+	public GameDTO findGame(@PathVariable Integer id) {
+		return this.service.findGame(id);
+	}
+	
 	// UPDATE
 	@PutMapping("/update/{id}")
 	public GameDTO updateGame(@RequestBody Game game, @PathVariable Integer id) {
