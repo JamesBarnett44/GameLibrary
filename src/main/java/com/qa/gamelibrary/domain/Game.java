@@ -26,8 +26,8 @@ public class Game {
 //	@Column(name = "Platform")
 //	private int platformId;
 	
-//	@ManyToOne
-//	private Platform platform;
+	@ManyToOne
+	private Platform platform;
 
 	public Game() {
 
@@ -98,9 +98,18 @@ public class Game {
 //		this.platform = platform;
 //	}
 
+	public Platform getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(Platform platform) {
+		this.platform = platform;
+	}
+
 	@Override
 	public String toString() {
-		return "Game [id=" + id + ", name=" + name + ", genre=" + genre + ", progress=" + progress + "]";
+		return "Game [id=" + id + ", name=" + name + ", genre=" + genre + ", progress=" + progress + ", platform="
+				+ platform + "]";
 	}
 
 	@Override
@@ -110,6 +119,7 @@ public class Game {
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((platform == null) ? 0 : platform.hashCode());
 		result = prime * result + ((progress == null) ? 0 : progress.hashCode());
 		return result;
 	}
@@ -137,6 +147,11 @@ public class Game {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (platform == null) {
+			if (other.platform != null)
+				return false;
+		} else if (!platform.equals(other.platform))
 			return false;
 		if (progress == null) {
 			if (other.progress != null)

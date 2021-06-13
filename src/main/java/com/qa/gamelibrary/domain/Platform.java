@@ -21,8 +21,8 @@ public class Platform {
 	@Column(name = "Name", nullable = false)
 	private String name;
 	
-	@OneToMany
-	@JsonIgnore
+	//@JsonIgnore
+	@OneToMany(mappedBy = "platform")	
 	private List<Game> games;
 
 	public Platform() {
