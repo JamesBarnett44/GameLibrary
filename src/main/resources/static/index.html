@@ -27,9 +27,9 @@
                     <label for="genre" class="form-label">Genre</label>
                     <input id="genre" name="genre" type="text" class="form-control">
 
-                    <label for="completed">Completed?</label>
+                    <label for="progress">Completed?</label>
                     <!-- <input id="completed" name="completed" type="checkbox" class="form-check"> -->
-                    <select id="completed" class="form-select">
+                    <select id="progress" class="form-select">
                         <option value="Unplayed">Unplayed</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
@@ -47,7 +47,8 @@
                     </select> -->
                     <button type="reset" class="btn btn-primary">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#platformModal">
                         Add a Platform
                     </button>
 
@@ -60,12 +61,13 @@
                 </div>
             </section>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal  for creating a platform-->
+        <div class="modal fade" id="platformModal" tabindex="-1" aria-labelledby="platformModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="platformModalLabel">Platform</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -80,8 +82,41 @@
             </div>
         </div>
 
+        <!-- Modal  for updating a game-->
+        <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="gameModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label for="gameName" class="form-label">Game Name</label>
+                            <input id="gameName" name="gameName" type="text" class="form-control">
 
-        <script src="index.js"></script>
+                            <label for="genre" class="form-label">Genre</label>
+                            <input id="genre" name="genre" type="text" class="form-control">
+
+                            <label for="progress">Completed?</label>
+                            <select id="progress" class="form-select">
+                                <option value="Unplayed">Unplayed</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="index.js" ?n=1></script>
     </main>
 </body>
 
