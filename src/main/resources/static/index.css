@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  align-items: center;  
+  padding: 20px;
+  background-color: #3e5c68;
+}
+
+.card{
+    background-color: rgb(124, 121, 121);
+}
+
+.row{
+    padding: 20px;
+}

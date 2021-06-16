@@ -39,7 +39,7 @@ const showGame = ({ id, name, genre, progress, platform }) => {
 
     // const platformText = document.createElement("p");
     // platformText.className = "card-text";
-    // platformText.innerText = `Platform: ${platform}`;
+    // platformText.innerText = `Platform: ${platform.value}`;
     // cardBody.appendChild(platformText);
 
     const updateButton = document.createElement("a");
