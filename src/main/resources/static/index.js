@@ -1,43 +1,16 @@
+var myModal = new bootstrap.Modal(document.getElementById("gameModal"), {});
+var focusedgame = 0;
 
-//console.log("Hello from the script");
-
-
-
-//let f = document.getElementById("gameForm");
-//CREATE
-document.querySelector("#gameForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const data = {
-        name: this.gameName.value,
-        //platform: this.platform.value
-        genre: this.genre.value,
-        completed: this.completed.value,
-        platform: {
-            id: this.platform.value
-            //name: this.platform.data
-        }
-    }
-    console.log(data);
-    axios.post("/games/create", data)
-        .then(res => {
-            getGames();
-            this.reset();
-            this.make.focus();
-        }).catch(err => console.log(err));
-});
-
-//READ
-const display = document.querySelector("#display")
-const output = document.getElementById("output");//??
+//READ GAMES
+const display = document.querySelector("#display");
+const output = document.getElementById("output");
 const getGames = async () => {
-    const response = axios.get('/games');
-    display.innerHTML = "";
-    output.innerHTML = ""; //??
+    const response = await axios.get("/games/");
+    output.innerHTML = "";
     response.data.forEach(game => showGame(game));
 }
 
-const showGame = ({ id, name, platform }) => {
+const showGame = ({ id, name, genre, progress, platform }) => {
     const column = document.createElement("div");
     column.className = "col";
 
@@ -61,13 +34,21 @@ const showGame = ({ id, name, platform }) => {
 
     const completedText = document.createElement("p");
     completedText.className = "card-text";
-    completedText.innerText = `Status: ${completed}`;
+    completedText.innerText = `Status: ${progress}`;
     cardBody.appendChild(completedText);
 
-    const platformText = document.createElement("p");
-    platformText.className = "card-text";
-    platformText.innerText = `Platform: ${platform}`;
-    cardBody.appendChild(platformText);
+    // const platformText = document.createElement("p");
+    // platformText.className = "card-text";
+    // platformText.innerText = `Platform: ${platform.value}`;
+    // cardBody.appendChild(platformText);
+
+    const updateButton = document.createElement("a");
+    updateButton.innerText = "Update";
+    updateButton.className = "btn btn-primary";
+    updateButton.addEventListener("click", function () {
+        updateGame(id, name, genre, progress, platform);
+    });
+    cardBody.appendChild(updateButton);
 
     const cardFooter = document.createElement("div");
     cardFooter.className = "card-footer";
@@ -75,41 +56,107 @@ const showGame = ({ id, name, platform }) => {
 
     const deleteButton = document.createElement("a");
     deleteButton.innerText = "Delete";
-    deleteButton.className = "card-link";
+    deleteButton.className = "btn btn-primary";
     deleteButton.addEventListener("click", function () {
         deleteGame(id);
     });
     cardFooter.appendChild(deleteButton);
 
     output.appendChild(column);
+}
+getGames();
 
+//CREATE GAME
+document.querySelector("#gameForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const data = {
+        name: this.gameName.value,
+        genre: this.genre.value,
+        progress: this.progress.value,
+        platform: {
+            id: this.platform.value,
+            //name: this.platform.data
+            name: "Steam"
+        }
+    }
+
+    console.log(data);
+    axios.post("/games/create/", data)
+        .then(res => {
+            getGames();
+            this.reset();
+            this.make.focus();
+        }).catch(err => console.log(err));
+});
+
+//UPDATE GAME
+const updateGame = async (id, name, genre, progress, platform) => {
+    focusedgame = id;
+    myModal.show();
+    getGames();
 }
 
-//UPDATE
-// var myModal = document.getElementById('myModal')
-// var myInput = document.getElementById('myInput')
+document.querySelector("#gameUpdateForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log(event);
+    console.log("ID: " + this.id);
+    var id = document.querySelector
+    const data = {
+        name: this.gameName.value,
+        genre: this.genre.value,
+        progress: this.progress.value,
+    }
 
-// myModal.addEventListener('shown.bs.modal', function () {
-//     myInput.focus()
-// })
+    axios.put(`/games/update/${focusedgame}`, data)
+        .then(res => {
+            getGames();
+            this.reset();
+        }).catch(err => console.log(err));
+});
 
 
-//DELETE
+//DELETE GAME
 const deleteGame = async (id) => {
-    const res = await axios.delete(`/games/remove/${id}`);
+    const res = await axios.delete(`/games/delete/${id}`);
     getGames();
 };
 
+//==================================================================================
+var platcount = 0;
 
-//MODAL FOR CREATING A PLATFORM
-// var myModal = new bootstrap.Modal(document.getElementById('myModal'), onclick)
-// var myModalEl = document.getElementById('exampleModal')
+//READ PLATFORMS
+const getPlatforms = async () => {
+    const response = await axios.get("/platforms/");
+    response.data.forEach(platform => console.log(platform));
+    response.data.forEach(platform => createPlatform(platform));
+}
+getPlatforms();
 
-// myModalEl.addEventListener('hidden.bs.modal', function (event) {
-//     select = document.getElementById('platform');
-//     var option = document.createElement('option');
-//     option.value = event.value;
-//     option.makeText = event.value;
-//     // option.innerHTML = event.value;
-//     select.appendChild(option);
-// })
+//CREATE DROPDOWN OPTION
+const createPlatform = async (data) => {
+    select = document.getElementById('platform');
+    var option = document.createElement('option');
+    option.value = ++platcount;
+    option.innerHTML = data.name;;
+    select.appendChild(option);
+}
+
+//CREATE PLATFORM
+document.querySelector("#addplatformForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const data = {
+        name: this.platformInput.value
+    }
+    console.log(data);
+    axios.post("/platforms/create/", data)
+        .then(res => {
+            getGames();
+            this.reset();
+        }).catch(err => console.log(err));
+    createPlatform(data);
+
+});
+
+//const showPlatformGames = async(id) 
+
