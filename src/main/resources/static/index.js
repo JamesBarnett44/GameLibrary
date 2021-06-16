@@ -1,5 +1,4 @@
 var myModal = new bootstrap.Modal(document.getElementById("gameModal"), {});
-var gamecount = 0;
 var focusedgame = 0;
 
 //READ GAMES
@@ -7,11 +6,7 @@ const display = document.querySelector("#display");
 const output = document.getElementById("output");
 const getGames = async () => {
     const response = await axios.get("/games/");
-    // display.innerHTML = "";
-    output.innerHTML = ""; //??
-    // console.log(response);
-    // response.data.forEach(game => console.log(game));
-    // response.data.forEach(() => gamecount++);
+    output.innerHTML = "";
     response.data.forEach(game => showGame(game));
 }
 
@@ -50,7 +45,6 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     const updateButton = document.createElement("a");
     updateButton.innerText = "Update";
     updateButton.className = "btn btn-primary";
-    updateButton.setAttribute("id", ++gamecount);
     updateButton.addEventListener("click", function () {
         updateGame(id, name, genre, progress, platform);
     });
@@ -68,16 +62,7 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     });
     cardFooter.appendChild(deleteButton);
 
-    /////////////////HIDDEN ID FOR UPDATING
-    // var hiddenId = document.createElement("input");
-    // hiddenId.setAttribute("style", "display: none");
-    // hiddenId.setAttribute("name", "hiddenId");
-    // hiddenId.setAttribute("id", "hiddenId");
-    // hiddenId.setAttribute("value", id);
-    // cardFooter.appendChild(hiddenId);
-
     output.appendChild(column);
-
 }
 getGames();
 
@@ -104,37 +89,11 @@ document.querySelector("#gameForm").addEventListener("submit", function (event) 
             this.make.focus();
         }).catch(err => console.log(err));
 });
+
 //UPDATE GAME
-
-//var myModal = new bootstrap.Modal(document.getElementById("gameModal"), {});
 const updateGame = async (id, name, genre, progress, platform) => {
-    console.log(id);
-    // console.log(name);
-    // console.log(genre);
-    // console.log(progress);
-    // console.log(platform);
-    const data = {
-        name: name,
-        genre: genre,
-        progress: progress,
-        // platform: platform
-        // platform: {
-        //     id: this.platform.value,
-        //     //name: this.platform.data
-        //     name: "Steam"
-        // }
-    }
     focusedgame = id;
-    console.log(data);
     myModal.show();
-    // const response = await axios.put(`/games/update/${id}`, data);
-
-    // axios.put(`/games/update/${id}`, data)
-    //     .then(res => {
-    //         getGames();
-    //         // this.reset();
-    //         // this.make.focus();
-    //     }).catch(err => console.log(err));
     getGames();
 }
 
@@ -148,17 +107,12 @@ document.querySelector("#gameUpdateForm").addEventListener("submit", function (e
         genre: this.genre.value,
         progress: this.progress.value,
     }
-    console.log(data);
-
-
 
     axios.put(`/games/update/${focusedgame}`, data)
         .then(res => {
             getGames();
             this.reset();
-            // this.make.focus();
         }).catch(err => console.log(err));
-
 });
 
 
@@ -174,9 +128,6 @@ var platcount = 0;
 //READ PLATFORMS
 const getPlatforms = async () => {
     const response = await axios.get("/platforms/");
-    // console.log(response);
-    // response.data.forEach(() => platcount++);
-    // console.log("platform count: " + platcount);
     response.data.forEach(platform => console.log(platform));
     response.data.forEach(platform => createPlatform(platform));
 }
@@ -192,7 +143,6 @@ const createPlatform = async (data) => {
 }
 
 //CREATE PLATFORM
-
 document.querySelector("#addplatformForm").addEventListener("submit", function (event) {
     event.preventDefault();
     const data = {

@@ -21,9 +21,10 @@ public class Platform {
 	@Column(name = "Name", nullable = false)
 	private String name;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "platform")	
 	private List<Game> games;
+	
 
 	public Platform() {
 	}
@@ -53,16 +54,25 @@ public class Platform {
 		this.name = name;
 	}
 	
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
+	
 	@Override
 	public String toString() {
-		return "Platform [Id=" + id + ", name=" + name + "]";
+		return "Platform [id=" + id + ", name=" + name + ", games=" + games + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((games == null) ? 0 : games.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -76,7 +86,15 @@ public class Platform {
 		if (getClass() != obj.getClass())
 			return false;
 		Platform other = (Platform) obj;
-		if (id != other.id)
+		if (games == null) {
+			if (other.games != null)
+				return false;
+		} else if (!games.equals(other.games))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)
