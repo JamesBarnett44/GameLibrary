@@ -6,9 +6,19 @@ body {
 }
 
 .card{
-    background-color: rgb(124, 121, 121);
+    background-color: rgb(168, 167, 167);
 }
 
 .row{
     padding: 20px;
 }
+
+.btn:focus{
+  color: red;
+}
+
+/* div {
+  background-color: lightgrey;
+  padding: 5px;
+  margin: 2px;
+ } */

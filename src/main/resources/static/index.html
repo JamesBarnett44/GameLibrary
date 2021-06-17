@@ -18,51 +18,56 @@
 
 <body>
     <h1>Game Library</h1>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button" aria-expanded="false"
+        aria-controls="collapseExample">Show/hide form</a>
     <main class="container">
-        <div class="row">
-            <section class="col">
-                <form id="gameForm">
-                    <label for="gameName" class="form-label">Game Name</label>
-                    <input id="gameName" name="gameName" type="text" class="form-control">
+        <div class="collapse" id="formcollapse">
+            <div class="row">
+                <section class="col">
+                    <form id="gameForm">
+                        <label for="gameName" class="form-label">Game Name</label>
+                        <input id="gameName" name="gameName" type="text" class="form-control">
 
-                    <label for="genre" class="form-label">Genre</label>
-                    <input id="genre" name="genre" type="text" class="form-control">
+                        <label for="genre" class="form-label">Genre</label>
+                        <input id="genre" name="genre" type="text" class="form-control">
 
-                    <label for="progress">Completed?</label>
-                    <select id="progress" class="form-select">
-                        <option value="Unplayed">Unplayed</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                    </select>
+                        <label for="progress">Completed?</label>
+                        <select id="progress" class="form-select">
+                            <option value="Unplayed">Unplayed</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
 
-                    <label for="platform" class="form-label">Platform</label>
-                    <select id="platform" class="form-select">
-                        <!-- <option value="0">No Platform</option> -->
+                        <label for="platform" class="form-label">Platform</label>
+                        <select id="platform" class="form-select">
+                            <!-- <option value="0">No Platform</option> -->
 
-                    </select>
+                        </select>
 
-                    <button type="reset" class="btn btn-primary">Reset</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#platformModal">
-                        Add a Platform
-                    </button>
-                    <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
-                    <button type="button" id="viewByPlatformButton" class="btn btn-primary">View By Platform</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#platformModal">
+                            Add a Platform
+                        </button>
+                        <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
+                        <button type="button" id="deletePlatformButton" class="btn btn-primary">Delete
+                            Platform</button>
 
 
-                </form>
-            </section>
-            <!-- <section class="col">
+                    </form>
+                </section>
+                <!-- <section class="col">
                 <div id="output" class="card-group row row-cols-4 g-4">
 
                 </div>
             </section> -->
+            </div>
         </div>
         <div class="row">
             <section class="col">
                 <!-- <div id="output" class="card-group row row-cols-4 g-4"> -->
-                <div id="platformSelection">
+                <div class="btn-group" role="group" id="platformSelection">
 
                 </div>
             </section>
