@@ -3,12 +3,12 @@ var focusedgame = 0;
 
 //READ GAMES
 const display = document.querySelector("#display");
-const output = document.getElementById("output");
+const output = document.querySelector("#output");
+const platforSelection = document.querySelector("#platformSelection");
 const getGames = async () => {
     const response = await axios.get("/games/");
     output.innerHTML = "";
     response.data.forEach(game => showGame(game));
-
 }
 
 const showGame = ({ id, name, genre, progress, platform }) => {
@@ -38,11 +38,6 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     completedText.innerText = `Status: ${progress}`;
     cardBody.appendChild(completedText);
 
-    const platformText = document.createElement("p");
-    platformText.className = "card-text";
-    platformText.innerText = `Platform: ${platform}`;
-    cardBody.appendChild(platformText);
-
     const updateButton = document.createElement("a");
     updateButton.innerText = "Update";
     updateButton.className = "btn btn-primary";
@@ -67,6 +62,10 @@ const showGame = ({ id, name, genre, progress, platform }) => {
 }
 getGames();
 
+document.querySelector("#viewAllButton").addEventListener("click", function (event) {
+    getGames();
+});
+
 //CREATE GAME
 document.querySelector("#gameForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -85,7 +84,7 @@ document.querySelector("#gameForm").addEventListener("submit", function (event) 
     // console.log(data);
     axios.post("/games/create/", data)
         .then(res => {
-            getGames();
+            //getGames();
             this.reset();
             this.make.focus();
         }).catch(err => console.log(err));
@@ -100,9 +99,7 @@ const updateGame = async (id, name, genre, progress, platform) => {
 
 document.querySelector("#gameUpdateForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    // console.log(event);
-    // console.log("ID: " + this.id);
-    var id = document.querySelector
+    //var id = document.querySelector
     const data = {
         name: this.gameName.value,
         genre: this.genre.value,
@@ -116,7 +113,6 @@ document.querySelector("#gameUpdateForm").addEventListener("submit", function (e
         }).catch(err => console.log(err));
 });
 
-
 //DELETE GAME
 const deleteGame = async (id) => {
     const res = await axios.delete(`/games/delete/${id}`);
@@ -125,11 +121,11 @@ const deleteGame = async (id) => {
 
 //==================================================================================
 var platcount = 0;
+var selectedPlatform = 0;
 
 //READ PLATFORMS
 const getPlatforms = async () => {
     const response = await axios.get("/platforms/");
-    response.data.forEach(platform => console.log(platform));
     response.data.forEach(platform => createPlatform(platform));
 }
 getPlatforms();
@@ -139,8 +135,21 @@ const createPlatform = async (data) => {
     select = document.getElementById('platform');
     var option = document.createElement('option');
     option.value = ++platcount;
-    option.innerHTML = data.name;;
+    option.innerHTML = data.name;
     select.appendChild(option);
+
+    platformSelection = document.getElementById('platformSelection')
+    var newbutton = document.createElement('button')
+    newbutton.id = platcount;
+    newbutton.textContent = data.name;
+    // newbutton.class = "btn btn-primary";
+    newbutton.classname = "btn-check";
+    newbutton.type = "button";
+    newbutton.onclick = function () {
+        selectedPlatform = this.id;
+        showPlatformGames(selectedPlatform);
+    }
+    platformSelection.appendChild(newbutton);
 }
 
 //CREATE PLATFORM
@@ -156,29 +165,15 @@ document.querySelector("#addplatformForm").addEventListener("submit", function (
             this.reset();
         }).catch(err => console.log(err));
     createPlatform(data);
-
 });
 
-//const showPlatformGames = async(id) 
+const showPlatformGames = async (id) => {
+    console.log("Platform ID: " + id);
+    const response = await axios.get(`/platforms/${selectedPlatform}`);
+    output.innerHTML = "";
+    response.data.games.forEach(game => {
+        showGame(game);
+    })
 
-//=================================================================================
-const test = async () => {
-    const res = await axios.get("/platforms/");
-    console.log(res);
-
-    res.data.forEach(platform => {
-        console.log(platform);
-        platform.games.forEach(game => {
-            console.log(game, platform);
-        })
-
-    });
-}
-
-
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'p') {
-        test();
-    }
-});
+};
 
