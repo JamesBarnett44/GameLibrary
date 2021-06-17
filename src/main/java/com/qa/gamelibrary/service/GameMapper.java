@@ -14,7 +14,6 @@ public class GameMapper {
 		dto.setName(game.getName());
 		dto.setGenre(game.getGenre());
 		dto.setProgress(game.getProgress());
-		//dto.setPlatformId(game.getPlatformId());
 		return dto;
 	}
 

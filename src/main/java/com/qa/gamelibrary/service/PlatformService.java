@@ -34,10 +34,10 @@ public class PlatformService {
 
 	// READ
 	public List<PlatformDTO> getPlatforms() {
-		List<Platform> games = this.repo.findAll();
+		List<Platform> platforms = this.repo.findAll();
 		List<PlatformDTO> dtos = new ArrayList<>();
-		for (Platform game : games) {
-			PlatformDTO dto = this.mapper.mapToDTO(game);
+		for (Platform platform : platforms) {
+			PlatformDTO dto = this.mapper.mapToDTO(platform);
 			dtos.add(dto);
 		}
 		return dtos;

@@ -1,5 +1,6 @@
 package com.qa.gamelibrary.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,18 +19,23 @@ public class Platform {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "Name", nullable = false)
+//	@Column(name = "Name", nullable = false)	
 	private String name;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "platform")	
-	private List<Game> games;
+	private List<Game> games = new ArrayList<>();
 	
 
 	public Platform() {
 	}
 
 	public Platform(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	public Platform(Integer id, String name, List<Game> games) {
 		this.id = id;
 		this.name = name;
 	}

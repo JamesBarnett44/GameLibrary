@@ -8,6 +8,7 @@ const getGames = async () => {
     const response = await axios.get("/games/");
     output.innerHTML = "";
     response.data.forEach(game => showGame(game));
+
 }
 
 const showGame = ({ id, name, genre, progress, platform }) => {
@@ -37,10 +38,10 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     completedText.innerText = `Status: ${progress}`;
     cardBody.appendChild(completedText);
 
-    // const platformText = document.createElement("p");
-    // platformText.className = "card-text";
-    // platformText.innerText = `Platform: ${platform.value}`;
-    // cardBody.appendChild(platformText);
+    const platformText = document.createElement("p");
+    platformText.className = "card-text";
+    platformText.innerText = `Platform: ${platform}`;
+    cardBody.appendChild(platformText);
 
     const updateButton = document.createElement("a");
     updateButton.innerText = "Update";
@@ -81,7 +82,7 @@ document.querySelector("#gameForm").addEventListener("submit", function (event) 
         }
     }
 
-    console.log(data);
+    // console.log(data);
     axios.post("/games/create/", data)
         .then(res => {
             getGames();
@@ -99,8 +100,8 @@ const updateGame = async (id, name, genre, progress, platform) => {
 
 document.querySelector("#gameUpdateForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log(event);
-    console.log("ID: " + this.id);
+    // console.log(event);
+    // console.log("ID: " + this.id);
     var id = document.querySelector
     const data = {
         name: this.gameName.value,
@@ -159,4 +160,25 @@ document.querySelector("#addplatformForm").addEventListener("submit", function (
 });
 
 //const showPlatformGames = async(id) 
+
+//=================================================================================
+const test = async () => {
+    const res = await axios.get("/platforms/");
+    console.log(res);
+
+    res.data.forEach(platform => {
+        console.log(platform);
+        platform.games.forEach(game => {
+            console.log(game, platform);
+        })
+
+    });
+}
+
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'p') {
+        test();
+    }
+});
 
