@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,15 +22,17 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.gamelibrary.domain.Platform;
+import com.qa.gamelibrary.dto.GameDTO;
 import com.qa.gamelibrary.dto.PlatformDTO;
 import com.qa.gamelibrary.repo.PlatformRepo;
 
 @SpringBootTest (webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Sql(scripts = { "classpath:platform-schema.sql",
-		"classpath:platform-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:test-schema.sql",
+"classpath:test-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
 public class PlatformIntegrationTest {
 
@@ -56,21 +59,16 @@ public class PlatformIntegrationTest {
 	
 	@Test
 	void testGetAll() throws Exception {
-		PlatformDTO testPlatform = new PlatformDTO(1, "Steam");
-		List<PlatformDTO> testPeople = List.of(testPlatform);
-		String testPeopleAsJSONArray = this.mapper.writeValueAsString(testPeople);
-
-		this.mvc.perform(get("/platforms/")).andExpect(status().isOk()).andExpect(content().json(testPeopleAsJSONArray));
-	}
-	
-//	@Test 
-//	void findByName() throws Exception{
-//		PlatformDTO testPlatform = new PlatformDTO(1, "Bloodborne", "RPG", "Completed");
-//		List<PlatformDTO> testPeople = List.of(testPlatform);
-//		String testPeopleAsJSONArray = this.mapper.writeValueAsString(testPeople);
-//		
-//		this.mvc.perform(get("/findByName/Steven")).andExpect(status().isOk()).andExpect(content().json(testPeopleAsJSONArray));
-//	}
+		GameDTO testgame = new GameDTO(1, "Bloodborne", "RPG", "Completed");		
+		List<GameDTO> testlist = List.of(testgame);
+		
+		PlatformDTO testPlatform = new PlatformDTO(1, "Steam", testlist);		
+		List<PlatformDTO> platformlist = List.of(testPlatform);
+		
+		String platformsAsJSONArray = this.mapper.writeValueAsString(platformlist);
+		
+		this.mvc.perform(get("/platforms/")).andExpect(status().isOk()).andExpect(content().json(platformsAsJSONArray));
+	}	
 
 	@Test
 	void testUpdate() throws Exception {
@@ -84,6 +82,7 @@ public class PlatformIntegrationTest {
 	@Test
 	void testDelete() throws Exception {
 		assertThat(repo.existsById(1));
+		this.mvc.perform(delete("/games/delete/1")).andExpect(status().isOk());
 		this.mvc.perform(delete("/platforms/delete/1")).andExpect(status().isOk());
 		assertThat(!(repo.existsById(1)));		
 	}

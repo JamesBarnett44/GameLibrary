@@ -1,12 +1,13 @@
 package com.qa.gamelibrary.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlatformDTO {
 
 	private Integer id;
 	private String name;
-	private List<GameDTO> games;
+	private List<GameDTO> games = new ArrayList<GameDTO>();
 
 	public PlatformDTO() {
 	}
@@ -18,6 +19,12 @@ public class PlatformDTO {
 
 	public PlatformDTO(String name) {
 		this.name = name;
+	}
+
+	public PlatformDTO(Integer id, String name, List<GameDTO> games) {
+		this.id = id;
+		this.name = name;
+		this.games = games;
 	}
 
 	public Integer getId() {

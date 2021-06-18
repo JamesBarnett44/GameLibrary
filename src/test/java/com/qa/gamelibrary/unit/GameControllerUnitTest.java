@@ -45,9 +45,6 @@ public class GameControllerUnitTest {
 	@Test
 	void testGetGames() {
 		// GIVEN
-//		Game existing = new Game(1, "Bloodborne", "RPG", "Completed");
-//		List<Game> games = List.of(existing);
-
 		GameDTO existingDTO = new GameDTO(1, "Bloodborne", "RPG", "Completed");
 		List<GameDTO> dtos = List.of(existingDTO);
 
