@@ -18,8 +18,11 @@
 
 <body>
     <h1>Game Library</h1>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button" aria-expanded="false"
-        aria-controls="collapseExample">Show/hide controls</a>
+    <div class="btn-group-vertical">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button" aria-expanded="false"
+            aria-controls="collapseExample">Show/hide controls</a>
+        <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
+    </div>
     <main class="container">
         <div class="collapse" id="formcollapse">
             <div class="row">
@@ -50,7 +53,8 @@
                             data-bs-target="#platformModal">
                             Add a Platform
                         </button>
-                        <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
+                        <!-- <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button> -->
+                        <button type="button" id="updatePlatformButton" class="btn btn-primary">Rename Platform</button>
                         <button type="button" id="deletePlatformButton" class="btn btn-primary">Delete
                             Platform</button>
 
@@ -68,6 +72,7 @@
             <section class="col">
                 <!-- <div id="output" class="card-group row row-cols-4 g-4"> -->
                 <div class="btn-group" role="group" id="platformSelection">
+                    <!-- <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button> -->
 
                 </div>
             </section>
