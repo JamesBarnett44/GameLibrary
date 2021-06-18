@@ -17,6 +17,7 @@ const showGame = ({ id, name, genre, progress, platform }) => {
 
     const card = document.createElement("div");
     card.className = "card";
+    card.id = "game" + id;
     column.appendChild(card);
 
     const cardBody = document.createElement("div");
@@ -133,14 +134,14 @@ getPlatforms();
 const createPlatformUI = async (platform) => {
     select = document.getElementById('platform');
     var option = document.createElement('option');
-    option.value = platform.id;
+    option.value = "platform" + platform.id;
     option.innerHTML = platform.name;
     select.appendChild(option);
 
     platformSelection = document.getElementById('platformSelection')
     const newbutton = document.createElement('button')
     newbutton.classList.add("btn", "btn-primary");
-    newbutton.id = platform.id;
+    newbutton.id = "platform" + platform.id;
     newbutton.textContent = platform.name;
 
     newbutton.onclick = function () {
