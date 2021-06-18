@@ -76,17 +76,14 @@ document.querySelector("#gameForm").addEventListener("submit", function (event) 
         progress: this.progress.value,
         platform: {
             id: this.platform.value,
-            //name: this.platform.data
-            name: "Steam"
+            name: this.platform.innerText
         }
     }
 
-    // console.log(data);
     axios.post("/games/create/", data)
         .then(res => {
-            //getGames();
+            getGames();
             this.reset();
-            // this.make.focus();
         }).catch(err => console.log(err));
 });
 
@@ -99,7 +96,6 @@ const updateGame = async (id, name, genre, progress, platform) => {
 
 document.querySelector("#gameUpdateForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    //var id = document.querySelector
     const data = {
         name: this.gameName.value,
         genre: this.genre.value,
@@ -116,7 +112,7 @@ document.querySelector("#gameUpdateForm").addEventListener("submit", function (e
 //DELETE GAME
 const deleteGame = async (id) => {
     const res = await axios.delete(`/games/delete/${id}`);
-    //getGames();
+    getGames();
 };
 
 //==================================================================================
@@ -126,25 +122,27 @@ var selectedPlatform = 0;
 //READ PLATFORMS
 const getPlatforms = async () => {
     const response = await axios.get("/platforms/");
-    response.data.forEach(platform => createPlatform(platform));
-    response.data.forEach(platform => console.log(platform));
+    platforSelection.innerHTML = "";
+    select = document.getElementById('platform');
+    select.innerHTML = "";
+    response.data.forEach(platform => createPlatformUI(platform));
 }
 getPlatforms();
 
 //CREATE DROPDOWN OPTION
-const createPlatform = async (data) => {
+const createPlatformUI = async (platform) => {
+    console.log(platform);
     select = document.getElementById('platform');
     var option = document.createElement('option');
-    option.value = ++platcount;
-    option.innerHTML = data.name;
+    option.value = platform.id;
+    option.innerHTML = platform.name;
     select.appendChild(option);
 
     platformSelection = document.getElementById('platformSelection')
     const newbutton = document.createElement('button')
-    //newbutton.type = "button";
     newbutton.classList.add("btn", "btn-primary");
-    newbutton.id = platcount;
-    newbutton.textContent = data.name;
+    newbutton.id = platform.id;
+    newbutton.textContent = platform.name;
 
     newbutton.onclick = function () {
         selectedPlatform = this.id;
@@ -164,19 +162,18 @@ document.querySelector("#addplatformForm").addEventListener("submit", function (
         .then(res => {
             getGames();
             this.reset();
+            getPlatforms();
         }).catch(err => console.log(err));
-    createPlatform(data);
 });
 
 const showPlatformGames = async (id) => {
-    //console.log("Platform ID: " + id);
     const response = await axios.get(`/platforms/${selectedPlatform}`);
     output.innerHTML = "";
     response.data.games.forEach(game => {
         showGame(game);
     })
-
 };
+
 
 //DELETE PLATFORM
 document.querySelector("#deletePlatformButton").addEventListener("click", function (event) {
@@ -203,6 +200,7 @@ const deletePlatform = async () => {
             deleteGame(game.id);
         })
         const response = await axios.delete(`/platforms/delete/${selectedPlatform}`);
+        getPlatforms();
         getGames();
     } else {
         console.log("delete cancelled");
