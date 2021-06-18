@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,9 @@ public class GameIntegrationTest {
 		Game testGame = new Game("Subnautica", "RPG", "Completed");
 		String testGameAsJSON = this.mapper.writeValueAsString(testGame);
 
-		Game testSavedGame = new Game(2, "Subnautica", "RPG", "Completed");
+		GameDTO testSavedGame = new GameDTO(2, "Subnautica", "RPG", "Completed");
 		String testSavedGameAsJSON = this.mapper.writeValueAsString(testSavedGame);
+		System.out.println(testSavedGameAsJSON);
 
 		this.mvc.perform(post("/games/create").content(testGameAsJSON).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().json(testSavedGameAsJSON));
@@ -57,7 +59,10 @@ public class GameIntegrationTest {
 	@Test
 	void testGetAll() throws Exception {
 		GameDTO testGame = new GameDTO(1, "Bloodborne", "RPG", "Completed");
-		List<GameDTO> testPeople = List.of(testGame);
+		//List<GameDTO> testPeople = List.of(testGame);
+		List<GameDTO> testPeople = new ArrayList<>(); 
+		testPeople.add(testGame);
+		
 		String testPeopleAsJSONArray = this.mapper.writeValueAsString(testPeople);
 
 		this.mvc.perform(get("/games/")).andExpect(status().isOk()).andExpect(content().json(testPeopleAsJSONArray));
@@ -76,9 +81,13 @@ public class GameIntegrationTest {
 	void testUpdate() throws Exception {
 		Game testGame = new Game(1, "Survival", "Subnautica", "In Progress");
 		String testGameAsJSON = this.mapper.writeValueAsString(testGame);
+		System.out.println(testGameAsJSON);
+		
+		GameDTO testGameDTO = new GameDTO(1, "Survival", "Subnautica", "In Progress");
+		String testGameDTOAsJSON = this.mapper.writeValueAsString(testGameDTO);
 
 		this.mvc.perform(put("/games/update/1").content(testGameAsJSON).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(content().json(testGameAsJSON));
+				.andExpect(status().isOk()).andExpect(content().json(testGameDTOAsJSON));
 	}	
 	
 	@Test

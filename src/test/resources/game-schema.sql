@@ -6,7 +6,7 @@ id integer not null auto_increment,
 genre varchar(255),
 name varchar(255),
 progress varchar(255),
-platformid int,
+platform_id int,
 primary key (id)
 );
 
@@ -16,4 +16,4 @@ name varchar(255) not null,
 primary key (id)
 );
 
-alter table game add constraint FKqbkf2002dfk9drnxmwxiqix6h foreign key (platformid) references platform (id);
+alter table game add constraint FKqbkf2002dfk9drnxmwxiqix6h foreign key (platform_id) references platform (id);

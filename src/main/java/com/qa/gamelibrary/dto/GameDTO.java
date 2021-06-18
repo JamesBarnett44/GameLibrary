@@ -1,14 +1,11 @@
 package com.qa.gamelibrary.dto;
 
-import com.qa.gamelibrary.domain.Game;
-
 public class GameDTO {
 
 	private Integer id;
 	private String name;
 	private String genre;
 	private String progress;
-	//private int platformId;
 
 	public GameDTO() {
 
@@ -19,14 +16,12 @@ public class GameDTO {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
-		//this.platformId = platformId;
 	}
 
 	public GameDTO(String name, String genre, String progress) {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
-		//this.platformId = platformId;
 	}
 
 	public Integer getId() {
@@ -60,14 +55,6 @@ public class GameDTO {
 	public void setProgress(String progress) {
 		this.progress = progress;
 	}
-
-//	public int getPlatformId() {
-//		return platformId;
-//	}
-//
-//	public void setPlatformId(Integer platformId) {
-//		this.platformId = platformId;
-//	}
 
 	@Override
 	public String toString() {

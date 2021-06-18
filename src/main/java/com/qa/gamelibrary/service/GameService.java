@@ -55,7 +55,6 @@ public class GameService {
 		existing.setName(update.getName());
 		existing.setGenre(update.getGenre());
 		existing.setProgress(update.getProgress());
-		//existing.setPlatformId(update.getPlatformId());
 		Game updated = this.repo.save(existing);
 		return this.mapper.mapToDTO(updated);
 	}
