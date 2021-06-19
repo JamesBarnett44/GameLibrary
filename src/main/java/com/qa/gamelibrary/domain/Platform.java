@@ -3,7 +3,6 @@ package com.qa.gamelibrary.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,28 +13,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Platform {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-//	@Column(name = "Name", nullable = false)	
+
 	private String name;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "platform")	
+	@OneToMany(mappedBy = "platform")
 	private List<Game> games = new ArrayList<>();
-	
 
 	public Platform() {
 	}
 
 	public Platform(Integer id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	
-	public Platform(Integer id, String name, List<Game> games) {
 		this.id = id;
 		this.name = name;
 	}
@@ -59,7 +51,7 @@ public class Platform {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<Game> getGames() {
 		return games;
 	}
@@ -67,7 +59,7 @@ public class Platform {
 	public void setGames(List<Game> games) {
 		this.games = games;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Platform [id=" + id + ", name=" + name + ", games=" + games + "]";
@@ -109,7 +101,5 @@ public class Platform {
 			return false;
 		return true;
 	}
-	
-	
 
 }

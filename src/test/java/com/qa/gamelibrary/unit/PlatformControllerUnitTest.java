@@ -96,7 +96,7 @@ public class PlatformControllerUnitTest {
 		Mockito.when(this.service.removePlatform(testId)).thenReturn(true);
 
 		// THEN
-		assertThat(this.controller.deletePlatform(testId)).isEqualTo(true);
+		assertThat(this.controller.deletePlatform(testId)).isTrue();
 
 		Mockito.verify(this.service, Mockito.times(1)).removePlatform(testId);
 	}

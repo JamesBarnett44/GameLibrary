@@ -46,7 +46,7 @@ public class PlatformIntegrationTest {
 	private PlatformRepo repo;
 
 	@Test
-	public void testCreate() throws Exception {
+	void testCreate() throws Exception {
 		Platform testPlatform = new Platform("GoG");
 		String testPlatformAsJSON = this.mapper.writeValueAsString(testPlatform);
 
@@ -81,10 +81,10 @@ public class PlatformIntegrationTest {
 	
 	@Test
 	void testDelete() throws Exception {
-		assertThat(repo.existsById(1));
+		assertThat(repo.existsById(1)).isTrue();
 		this.mvc.perform(delete("/games/delete/1")).andExpect(status().isOk());
 		this.mvc.perform(delete("/platforms/delete/1")).andExpect(status().isOk());
-		assertThat(!(repo.existsById(1)));		
+		assertThat(repo.existsById(1)).isFalse();		
 	}
 
 }

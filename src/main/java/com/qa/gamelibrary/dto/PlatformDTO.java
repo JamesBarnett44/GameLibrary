@@ -7,17 +7,13 @@ public class PlatformDTO {
 
 	private Integer id;
 	private String name;
-	private List<GameDTO> games = new ArrayList<GameDTO>();
+	private List<GameDTO> games = new ArrayList<>();
 
 	public PlatformDTO() {
 	}
 
 	public PlatformDTO(Integer id, String name) {
 		this.id = id;
-		this.name = name;
-	}
-
-	public PlatformDTO(String name) {
 		this.name = name;
 	}
 

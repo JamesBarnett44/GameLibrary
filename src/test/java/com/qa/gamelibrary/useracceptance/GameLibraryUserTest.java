@@ -3,6 +3,8 @@ package com.qa.gamelibrary.useracceptance;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,17 +47,10 @@ public class GameLibraryUserTest {
 	@AfterAll
 	public static void cleanup() {
 		driver.quit();
-	}
+	}	
 
 	@Test
-	public void testformToggle() {
-		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
-		driver.get(URL);
-		GameLibrary.toggleForm();
-	}
-
-	@Test
-	public void testReadGame() throws InterruptedException {
+	void testReadGame() {
 		driver.get(URL);
 
 		new WebDriverWait(driver, 1)
@@ -63,11 +58,11 @@ public class GameLibraryUserTest {
 
 		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[1]/p[1]"));
 
-		assertThat("Name: Bloodborne").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Name: Bloodborne");
 	}
 
 	@Test
-	public void testCreateGame() throws InterruptedException {
+	void testCreateGame() {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		GameLibrary.toggleForm();
@@ -78,11 +73,11 @@ public class GameLibraryUserTest {
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"2\"]/div[1]/p[1]")));
 
 		targ = driver.findElement(By.xpath("//*[@id=\"2\"]/div[1]/p[1]"));
-		assertThat("Name: Brigador").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Name: Brigador");
 	}
 
 	@Test
-	public void testUpdateGame() throws InterruptedException {
+	void testUpdateGame() {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		new WebDriverWait(driver, 1)
@@ -97,39 +92,39 @@ public class GameLibraryUserTest {
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"1\"]/div[1]/p[1]")));
 
 		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[1]/p[1]"));
-		assertThat("Name: Subnautica").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Name: Subnautica");
 	}
 
 	@Test
-	public void testDeleteGame() throws InterruptedException {
+	void testDeleteGame() {
 		driver.get(URL);
 		new WebDriverWait(driver, 1)
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"1\"]/div[1]/p[1]")));
 
 		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[1]/p[1]"));
 
-		assertThat("Name: Bloodborne").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Name: Bloodborne");
 
 		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[2]/a"));
 		targ.click();
-		Thread.sleep(1000);
+		LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1000));
 
 		List<WebElement> games = driver.findElements(By.xpath("//*[@id=\"1\"]/div[1]/p[1]"));
-		assertThat(games.size()).isEqualTo(0);
+		assertThat(games.size()).isZero();
 	}
 
 	@Test
-	public void testReadPlatform() throws InterruptedException {
+	void testReadPlatform() {
 		driver.get(URL);
 		new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.name("platform1")));
 
 		targ = driver.findElement(By.name("platform1"));
 
-		assertThat("Steam").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Steam");
 	}
 
 	@Test
-	public void testCreatePlatform() throws InterruptedException {
+	void testCreatePlatform() {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		GameLibrary.toggleForm();
@@ -143,11 +138,11 @@ public class GameLibraryUserTest {
 		new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.name("platform2")));
 
 		targ = driver.findElement(By.name("platform2"));
-		assertThat("GOG").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("GOG");
 	}
 
 	@Test
-	public void testUpdatePlatform() throws InterruptedException {
+	void testUpdatePlatform() {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		GameLibrary.toggleForm();
@@ -162,11 +157,11 @@ public class GameLibraryUserTest {
 		new WebDriverWait(driver, 5).until(ExpectedConditions.textToBe(By.name("platform1"), "Origin"));
 
 		targ = driver.findElement(By.name("platform1"));
-		assertThat("Origin").isEqualTo(targ.getText());
+		assertThat(targ.getText()).isEqualTo("Origin");
 	}
 
 	@Test
-	public void testDeletePlatform() throws InterruptedException {
+	void testDeletePlatform() {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		GameLibrary.toggleForm();
@@ -178,9 +173,9 @@ public class GameLibraryUserTest {
 		Alert alert = driver.switchTo().alert();
 		alert.sendKeys("delete");
 		alert.accept();
-		Thread.sleep(2000);
+		LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1000));
 
 		List<WebElement> platform = driver.findElements(By.name("platform1"));
-		assertThat(platform.size()).isEqualTo(0);
+		assertThat(platform.size()).isZero();
 	}
 }
