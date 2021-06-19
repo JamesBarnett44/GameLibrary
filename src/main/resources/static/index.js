@@ -17,7 +17,8 @@ const showGame = ({ id, name, genre, progress, platform }) => {
 
     const card = document.createElement("div");
     card.className = "card";
-    card.id = "game" + id;
+    // card.setAttribute = (name, "game" + id);
+    card.id = id;
     column.appendChild(card);
 
     const cardBody = document.createElement("div");
@@ -27,6 +28,7 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     const nameText = document.createElement("p");
     nameText.className = "card-text";
     nameText.innerText = `Name: ${name}`;
+    nameText.name = "game" + id;
     cardBody.appendChild(nameText);
 
     const genreText = document.createElement("p");
@@ -98,9 +100,9 @@ const updateGame = async (id) => {
 document.querySelector("#gameUpdateForm").addEventListener("submit", function (event) {
     event.preventDefault();
     const data = {
-        name: this.gameName.value,
-        genre: this.genre.value,
-        progress: this.progress.value,
+        name: this.updatedGameName.value,
+        genre: this.updatedGenre.value,
+        progress: this.updatedProgress.value,
     }
 
     axios.put(`/games/update/${focusedgame}`, data)
@@ -134,14 +136,16 @@ getPlatforms();
 const createPlatformUI = async (platform) => {
     select = document.getElementById('platform');
     var option = document.createElement('option');
-    option.value = "platform" + platform.id;
+    option.value = platform.id;
+    //option.id = "platform" + platform.id;
     option.innerHTML = platform.name;
     select.appendChild(option);
 
     platformSelection = document.getElementById('platformSelection')
     const newbutton = document.createElement('button')
     newbutton.classList.add("btn", "btn-primary");
-    newbutton.id = "platform" + platform.id;
+    newbutton.name = "platform" + platform.id;
+    newbutton.id = platform.id;
     newbutton.textContent = platform.name;
 
     newbutton.onclick = function () {
@@ -186,13 +190,17 @@ document.querySelector("#updatePlatformButton").addEventListener("click", async 
 });
 
 //DELETE PLATFORM
-document.querySelector("#deletePlatformButton").addEventListener("click", function (event) {
+document.querySelector("#deletePlatformButton").addEventListener("click", async function (event) {
     event.preventDefault();
     var platformid = selectedPlatform;
     var input = prompt("Please enter 'delete' to delete the selected platform and its' games");
     if (input == 'delete') {
-        clearPlatform(platformid);
-        deletePlatform(platformid);
+        await clearPlatform(platformid);
+
+        // Creates time for the database to update so foreign key isn't a problem
+        await new Promise(r => setTimeout(r, 1000));
+
+        await deletePlatform(platformid);
     } else {
         console.log("delete cancelled");
     }
