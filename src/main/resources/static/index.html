@@ -20,7 +20,7 @@
     <h1>Game Library</h1>
     <div class="btn-group-vertical">
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button" aria-expanded="false"
-            aria-controls="collapseExample">Show/hide controls</a>
+            aria-controls="collapseExample">Toggle Controls</a>
         <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
     </div>
     <main class="container">
@@ -48,8 +48,8 @@
                         </select>
 
                         <button type="reset" class="btn btn-primary">Reset</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="submit" id="submitGameButton" class="btn btn-primary">Submit</button>
+                        <button type="button" id="addPlatformButton" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#platformModal">
                             Add a Platform
                         </button>
@@ -118,14 +118,14 @@
                     </div>
                     <div class="modal-body">
                         <form id="gameUpdateForm">
-                            <label for="gameName" class="form-label">Game Name</label>
-                            <input id="gameName" name="gameName" type="text" class="form-control">
+                            <label for="updatedGameName" class="form-label">Game Name</label>
+                            <input id="updatedGameName" name="updatedGameName" type="text" class="form-control">
 
-                            <label for="genre" class="form-label">Genre</label>
-                            <input id="genre" name="genre" type="text" class="form-control">
+                            <label for="updatedGenre" class="form-label">Genre</label>
+                            <input id="updatedGenre" name="updatedGenre" type="text" class="form-control">
 
-                            <label for="progress">Completed?</label>
-                            <select id="progress" class="form-select">
+                            <label for="updatedProgress">Completed?</label>
+                            <select id="updatedProgress" class="form-select">
                                 <option value="Unplayed">Unplayed</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Completed">Completed</option>
