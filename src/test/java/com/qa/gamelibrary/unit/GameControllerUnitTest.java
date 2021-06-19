@@ -96,7 +96,7 @@ public class GameControllerUnitTest {
 		Mockito.when(this.service.removeGame(testId)).thenReturn(true);
 
 		// THEN
-		assertThat(this.controller.deleteGame(testId)).isEqualTo(true);
+		assertThat(this.controller.deleteGame(testId)).isTrue();
 
 		Mockito.verify(this.service, Mockito.times(1)).removeGame(testId);
 	}

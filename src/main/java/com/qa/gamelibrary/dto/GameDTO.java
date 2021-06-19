@@ -17,13 +17,7 @@ public class GameDTO {
 		this.genre = genre;
 		this.progress = progress;
 	}
-
-	public GameDTO(String name, String genre, String progress) {
-		this.name = name;
-		this.genre = genre;
-		this.progress = progress;
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -60,7 +54,7 @@ public class GameDTO {
 	public String toString() {
 		return "GameDTO [id=" + id + ", name=" + name + ", genre=" + genre + ", progress=" + progress + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

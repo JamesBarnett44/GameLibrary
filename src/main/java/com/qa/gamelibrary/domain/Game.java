@@ -1,6 +1,5 @@
 package com.qa.gamelibrary.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,18 +13,12 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "Name")
 	private String name;
 
-	@Column(name = "Genre")
 	private String genre;
 
-	@Column(name = "Progress")
 	private String progress;
 
-//	@Column(name = "Platform")
-//	private int platformId;
-	
 	@ManyToOne
 	private Platform platform;
 
@@ -38,14 +31,12 @@ public class Game {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
-		//this.platformId = platformId;
 	}
 
 	public Game(String name, String genre, String progress) {
 		this.name = name;
 		this.genre = genre;
 		this.progress = progress;
-		//this.platformId = platformId;
 	}
 
 	public Integer getId() {
@@ -79,24 +70,6 @@ public class Game {
 	public void setProgress(String progress) {
 		this.progress = progress;
 	}
-	
-	
-
-//	public int getPlatformId() {
-//		return platformId;
-//	}
-//
-//	public void setPlatformId(Integer platformId) {
-//		this.platformId = platformId;
-//	}
-
-//	public Platform getPlatform() {
-//		return platform;
-//	}
-//
-//	public void setPlatform(Platform platform) {
-//		this.platform = platform;
-//	}
 
 	public Platform getPlatform() {
 		return platform;

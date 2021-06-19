@@ -1,4 +1,4 @@
-package com.qa.gamelibrary.service;
+package com.qa.gamelibrary.utils;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import com.qa.gamelibrary.dto.GameDTO;
 import com.qa.gamelibrary.dto.PlatformDTO;
 
 @Service
-public class PlatformMapper {
+public class PlatformMapper implements Mapper<Platform, PlatformDTO>{
 	
 	private GameMapper gameMapper;
 	
@@ -20,6 +20,7 @@ public class PlatformMapper {
 		this.gameMapper = gameMapper;
 	}
 	
+	@Override
 	public PlatformDTO mapToDTO(Platform platform) {
 		PlatformDTO dto = new PlatformDTO();
 		dto.setId(platform.getId());
@@ -31,5 +32,4 @@ public class PlatformMapper {
 		dto.setGames(games);
 		return dto;
 	}
-
 }

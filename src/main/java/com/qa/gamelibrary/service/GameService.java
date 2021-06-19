@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.qa.gamelibrary.domain.Game;
 import com.qa.gamelibrary.dto.GameDTO;
 import com.qa.gamelibrary.repo.GameRepo;
+import com.qa.gamelibrary.utils.GameMapper;
 
 @Service
 public class GameService {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.qa.gamelibrary.domain.Platform;
 import com.qa.gamelibrary.dto.PlatformDTO;
 import com.qa.gamelibrary.repo.PlatformRepo;
+import com.qa.gamelibrary.utils.PlatformMapper;
 
 @Service
 public class PlatformService {

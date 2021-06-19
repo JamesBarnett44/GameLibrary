@@ -44,7 +44,7 @@ public class GameIntegrationTest {
 	private GameRepo repo;
 
 	@Test
-	public void testCreate() throws Exception {
+	void testCreate() throws Exception {
 		Game testGame = new Game("Subnautica", "RPG", "Completed");
 		String testGameAsJSON = this.mapper.writeValueAsString(testGame);
 
@@ -82,9 +82,9 @@ public class GameIntegrationTest {
 
 	@Test
 	void testDelete() throws Exception {
-		assertThat(repo.existsById(1));
+		assertThat(repo.existsById(1)).isTrue();
 		this.mvc.perform(delete("/games/delete/1")).andExpect(status().isOk());
-		assertThat(!(repo.existsById(1)));
+		assertThat(repo.existsById(1)).isFalse();
 	}
 
 }
