@@ -1,6 +1,6 @@
 # Game Library
 
-This application way for a user to track their owned videogames across multiple platforms. It interacts with a database that stores platforms and games. A user can create, read, update and delete both of these entities. The displayed games can also be filtered by platform.
+This application provides a way for a user to track their owned videogames across multiple platforms. It interacts with a database that stores platforms and games. A user can create, read, update and delete both of these entities. The displayed games can also be filtered by platform.
 
 See the Documentation folder for a UML Class Diagram for the backend and an Entity Relationship Diagram for the database.
 
@@ -125,7 +125,7 @@ public void createGame(String gameName, String genre) {
 }
 ```
 
-Then the main test class can create an instance of that class, use the methods and test functionality, in this case checking that a new game with the specified title is has been created:
+Then the main test class can create an instance of that class, use the methods and test functionality, in this case checking that a new game with the specified title has been created:
 ```
 @Test
 void testCreateGame() {
