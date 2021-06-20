@@ -17,7 +17,6 @@ const showGame = ({ id, name, genre, progress, platform }) => {
 
     const card = document.createElement("div");
     card.className = "card";
-    // card.setAttribute = (name, "game" + id);
     card.id = id;
     column.appendChild(card);
 
@@ -41,17 +40,17 @@ const showGame = ({ id, name, genre, progress, platform }) => {
     completedText.innerText = `Status: ${progress}`;
     cardBody.appendChild(completedText);
 
+    const cardFooter = document.createElement("div");
+    cardFooter.className = "card-footer";
+    card.appendChild(cardFooter);
+
     const updateButton = document.createElement("a");
     updateButton.innerText = "Update";
     updateButton.className = "btn btn-primary";
     updateButton.addEventListener("click", function () {
         updateGame(id);
     });
-    cardBody.appendChild(updateButton);
-
-    const cardFooter = document.createElement("div");
-    cardFooter.className = "card-footer";
-    card.appendChild(cardFooter);
+    cardFooter.appendChild(updateButton);
 
     const deleteButton = document.createElement("a");
     deleteButton.innerText = "Delete";
@@ -137,7 +136,6 @@ const createPlatformUI = async (platform) => {
     select = document.getElementById('platform');
     var option = document.createElement('option');
     option.value = platform.id;
-    //option.id = "platform" + platform.id;
     option.innerHTML = platform.name;
     select.appendChild(option);
 

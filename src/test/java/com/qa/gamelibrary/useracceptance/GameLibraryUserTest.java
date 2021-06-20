@@ -81,9 +81,9 @@ public class GameLibraryUserTest {
 		GameLibraryIndex GameLibrary = PageFactory.initElements(driver, GameLibraryIndex.class);
 		driver.get(URL);
 		new WebDriverWait(driver, 1)
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"1\"]/div[1]/a")));
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"1\"]/div[2]/a[1]")));
 
-		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[1]/a"));
+		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[2]/a[1]"));
 		targ.click();
 		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.id("gameModal")));
 
@@ -105,14 +105,14 @@ public class GameLibraryUserTest {
 
 		assertThat(targ.getText()).isEqualTo("Name: Bloodborne");
 
-		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[2]/a"));
+		targ = driver.findElement(By.xpath("//*[@id=\"1\"]/div[2]/a[2]"));
 		targ.click();
 		LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1000));
 
 		List<WebElement> games = driver.findElements(By.xpath("//*[@id=\"1\"]/div[1]/p[1]"));
 		assertThat(games.size()).isZero();
 	}
-
+	
 	@Test
 	void testReadPlatform() {
 		driver.get(URL);
@@ -173,7 +173,7 @@ public class GameLibraryUserTest {
 		Alert alert = driver.switchTo().alert();
 		alert.sendKeys("delete");
 		alert.accept();
-		LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1000));
+		LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(2000));
 
 		List<WebElement> platform = driver.findElements(By.name("platform1"));
 		assertThat(platform.size()).isZero();

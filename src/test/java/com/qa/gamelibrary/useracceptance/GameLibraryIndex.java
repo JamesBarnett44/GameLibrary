@@ -8,7 +8,7 @@ public class GameLibraryIndex {
 
 	public static final String URL = "http://localhost:8080/";
 
-	@FindBy(xpath = "/html/body/div/a")
+	@FindBy(xpath = "/html/body/main/div[1]/a")
 	private WebElement gameformButton;
 
 	@FindBy(id = "gameName")
@@ -22,7 +22,7 @@ public class GameLibraryIndex {
 	
 	@FindBy(xpath = "//*[@id=\"gameUpdateForm\"]/button")
 	private WebElement gameUpdateFormButton;
-	
+	//*[@id="1"]/div[2]/a[1]
 	@FindBy(id = "updatedGameName")
 	private WebElement updatedGameNameField;	
 	

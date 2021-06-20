@@ -17,13 +17,13 @@
 </head>
 
 <body>
-    <h1>Game Library</h1>
-    <div class="btn-group-vertical">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button" aria-expanded="false"
-            aria-controls="collapseExample">Toggle Controls</a>
-        <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
-    </div>
     <main class="container">
+        <h1>Game Library</h1>
+        <div class="btn-group">
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#formcollapse" role="button"
+                aria-expanded="false" aria-controls="collapseExample">Toggle Controls</a>
+            <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button>
+        </div>
         <div class="collapse" id="formcollapse">
             <div class="row">
                 <section class="col">
@@ -43,7 +43,6 @@
 
                         <label for="platform" class="form-label">Platform</label>
                         <select id="platform" class="form-select">
-                            <!-- <option value="0">No Platform</option> -->
 
                         </select>
 
@@ -53,7 +52,6 @@
                             data-bs-target="#platformModal">
                             Add a Platform
                         </button>
-                        <!-- <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button> -->
                         <button type="button" id="updatePlatformButton" class="btn btn-primary">Rename Platform</button>
                         <button type="button" id="deletePlatformButton" class="btn btn-primary">Delete
                             Platform</button>
@@ -61,18 +59,12 @@
 
                     </form>
                 </section>
-                <!-- <section class="col">
-                <div id="output" class="card-group row row-cols-4 g-4">
 
-                </div>
-            </section> -->
             </div>
         </div>
         <div class="row">
             <section class="col">
-                <!-- <div id="output" class="card-group row row-cols-4 g-4"> -->
                 <div class="btn-group" role="group" id="platformSelection">
-                    <!-- <button type="button" id="viewAllButton" class="btn btn-primary">View All Games</button> -->
 
                 </div>
             </section>
@@ -80,7 +72,6 @@
         <div class="row">
             <section class="col">
                 <div id="output" class="card-group row row-cols-4 g-4">
-                    <!-- <div id="output" class="card-group"> -->
 
                 </div>
             </section>
@@ -134,10 +125,6 @@
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div> -->
                 </div>
             </div>
         </div>
